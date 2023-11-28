@@ -1,5 +1,6 @@
 from icecream import ic, install
 install() 
+from PySide6.QtWidgets import QApplication
 import pandas as pd
 import numpy as np
 from get_month_year import get_month_year
@@ -29,7 +30,11 @@ b. Ask user for debt value
 
 6. Export to CSV
 '''
-# 0
+
+app = QApplication([])  # Create the QApplication instance here
+
+
+# Welcom message
 print(
 '''
 Welcome to the Net Income Calculator. There are multiple accounts, assets and debts
@@ -57,11 +62,11 @@ month, year = get_month_year()
 ic(month,year)
 
 # 1a
-user_account_list = gather_income_accounts()
+user_account_list = gather_income_accounts(app)
 ic(user_account_list)
 
-# 1b
-account_list, account_value_dict = gather_income_account_values(user_account_list)
+# 1b (Updated to use the new function)
+account_list, account_value_dict = gather_income_account_values(app, user_account_list)
 ic(account_list, account_value_dict)
 
 # 2a
@@ -75,3 +80,4 @@ ic(asset_list, asset_values_dict)
 # 3a
 debt_list = gather_debt_accounts()
 ic(debt_list)
+
